@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : minic
+Source Server         : conn
 Source Server Version : 50524
 Source Host           : localhost:3306
 Source Database       : etl
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2016-03-15 16:26:59
+Date: 2016-04-22 20:23:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -51,24 +51,6 @@ CREATE TABLE `course` (
 INSERT INTO `course` VALUES ('1', 'wy', null, '英语听说', '32');
 
 -- ----------------------------
--- Table structure for course_unit
--- ----------------------------
-DROP TABLE IF EXISTS `course_unit`;
-CREATE TABLE `course_unit` (
-  `Course_cId` int(11) NOT NULL,
-  `units_uId` int(11) NOT NULL,
-  UNIQUE KEY `units_uId` (`units_uId`),
-  KEY `FK5E68A728B544B9EC` (`Course_cId`),
-  KEY `FK5E68A728316F05FB` (`units_uId`),
-  CONSTRAINT `FK5E68A728316F05FB` FOREIGN KEY (`units_uId`) REFERENCES `unit` (`uId`),
-  CONSTRAINT `FK5E68A728B544B9EC` FOREIGN KEY (`Course_cId`) REFERENCES `course` (`cId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of course_unit
--- ----------------------------
-
--- ----------------------------
 -- Table structure for news
 -- ----------------------------
 DROP TABLE IF EXISTS `news`;
@@ -77,10 +59,10 @@ CREATE TABLE `news` (
   `_content` varchar(255) DEFAULT NULL,
   `_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `_title` varchar(255) DEFAULT NULL,
-  `publishRole` int(11) NOT NULL,
-  `publisher` varchar(255) NOT NULL,
+  `publishRole` int(11) DEFAULT NULL,
+  `publisher` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of news
@@ -89,6 +71,7 @@ INSERT INTO `news` VALUES ('1', 'News1', '2016-03-08 00:00:00', 'news1', '0', 'w
 INSERT INTO `news` VALUES ('2', 'News2', '2016-03-14 00:00:00', 'News2', '0', 'wy');
 INSERT INTO `news` VALUES ('3', 'News3', '2016-03-14 00:00:00', 'News3', '0', 'wy');
 INSERT INTO `news` VALUES ('4', 'News4', '2016-03-14 00:00:00', 'News4', '0', 'wy');
+INSERT INTO `news` VALUES ('7', 'post6', null, 'post6', '0', null);
 
 -- ----------------------------
 -- Table structure for post
@@ -100,11 +83,11 @@ CREATE TABLE `post` (
   `_content` varchar(255) DEFAULT NULL,
   `_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `_title` varchar(255) DEFAULT NULL,
-  `publishRole` int(11) NOT NULL,
-  `publisher` varchar(255) NOT NULL,
+  `publishRole` int(11) DEFAULT NULL,
+  `publisher` varchar(255) DEFAULT NULL,
   `toPerson` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of post
@@ -114,6 +97,7 @@ INSERT INTO `post` VALUES ('2', '1', 'post2', '2016-03-14 00:00:00', 'post2', '0
 INSERT INTO `post` VALUES ('3', '1', 'post3', '2016-03-14 00:00:00', 'post3', '0', 'wy', '');
 INSERT INTO `post` VALUES ('4', '1', 'post4', '2016-03-14 00:00:00', 'post4', '0', 'wy', '');
 INSERT INTO `post` VALUES ('5', '1', 'post5', '2016-03-14 00:00:00', 'post5', '0', 'wy', '');
+INSERT INTO `post` VALUES ('6', '0', 'post6', null, 'post6', '0', null, null);
 
 -- ----------------------------
 -- Table structure for student
@@ -124,7 +108,8 @@ CREATE TABLE `student` (
   `email` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`username`)
+  PRIMARY KEY (`username`),
+  KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -157,12 +142,13 @@ DROP TABLE IF EXISTS `unit`;
 CREATE TABLE `unit` (
   `uIntro` varchar(255) DEFAULT NULL,
   `uName` varchar(255) NOT NULL,
-  `uId` int(11) NOT NULL,
-  PRIMARY KEY (`uId`)
+  `cId` int(11) NOT NULL,
+  `uIndex` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of unit
 -- ----------------------------
-INSERT INTO `unit` VALUES ('safsd', 'unit1', '10001');
-INSERT INTO `unit` VALUES (null, 'unit2', '10002');
+INSERT INTO `unit` VALUES ('safsd', 'unit1', '0', '1');
+INSERT INTO `unit` VALUES ('发生的', 'unit2', '0', '2');
+INSERT INTO `unit` VALUES ('地方', 'unit3', '0', '3');
