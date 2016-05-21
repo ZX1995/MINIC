@@ -5,19 +5,31 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 @Embeddable
 public class UnitKey implements Serializable{
-	/**
-	 * 单元所属课程的ID（必）
-	 */
-	private int cId;
-	/**
-	 * 第几单元（必）
-	 */
+	
+	private static final long serialVersionUID = 1L;
+	private String gName;
+	private int cIndex;
 	private int uIndex;
-	public int getcId() {
-		return cId;
+	public UnitKey() {
+		// TODO Auto-generated constructor stub
 	}
-	public void setcId(int cId) {
-		this.cId = cId;
+	public UnitKey(String gName,int cIndex,int uIndex)
+	{
+		this.gName = gName;
+		this.cIndex = cIndex;
+		this.uIndex = uIndex;
+	}
+	public String getgName() {
+		return gName;
+	}
+	public void setgName(String gName) {
+		this.gName = gName;
+	}
+	public int getcIndex() {
+		return cIndex;
+	}
+	public void setcIndex(int cIndex) {
+		this.cIndex = cIndex;
 	}
 	public int getuIndex() {
 		return uIndex;
@@ -28,17 +40,14 @@ public class UnitKey implements Serializable{
 	@Override
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
-		if(obj instanceof UnitKey)
-		{
-			UnitKey unitkey=(UnitKey)obj;
-			if(cId==unitkey.cId&&uIndex==unitkey.uIndex) return true;
-			
-		}
+		if(null==obj||!(obj instanceof UnitKey)) return false;
+		UnitKey unitkey=(UnitKey)obj;
+		if(cIndex==unitkey.getcIndex()&&uIndex==unitkey.getuIndex()&&unitkey.getgName().equals(gName)) return true;
 		return false;
 	}
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
-		return cId*10000+uIndex;
+		return gName.hashCode()+cIndex+uIndex;
 	}
 }

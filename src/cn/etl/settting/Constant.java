@@ -1,11 +1,11 @@
 package cn.etl.settting;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.collections.map.HashedMap;
 
 public class Constant {
-	   public static final  Map<String, Integer>PAGE_SIZE=new HashedMap(8);
+	   public static final  Map<String, Integer>PAGE_SIZE=new HashMap<String, Integer>();
 	   static{
 		   PAGE_SIZE.put("Admin",8);
 		   PAGE_SIZE.put("Student", 8);
@@ -16,6 +16,6 @@ public class Constant {
 		   PAGE_SIZE.put("Unit", 8);
 
 	   }
-	   public static final String RESULT="/result.jsp",LOGIN="/login.jsp";
-	   
+	   public static final String RESULT="/result.jsp",LOGIN="/login.jsp",HOME ="/home.jsp";
+	   public static final String projectTitle = "英语教学平台";
 }

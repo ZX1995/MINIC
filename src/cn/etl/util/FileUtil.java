@@ -65,6 +65,12 @@ public class FileUtil {
 		for(String s:vSuff) if(s.equals(suf)) return true;
 		return false;
 	}
+	public static boolean isPdf(File file)
+	{
+		if("pdf".equals(getSuffix(file)))
+			return true;
+		return false;
+	}
 	public static String getSuffix(File file) {
         String fileName=file.getName();
         return fileName.substring(fileName.lastIndexOf(".")+1).toLowerCase();

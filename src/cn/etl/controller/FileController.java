@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.net.URL;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
@@ -28,21 +29,15 @@ public class FileController {
 	public final static String[] fileCate={"exercise",//链接
 			"courseware",//下载
 			"video"};//观看
-	final String basePath = "courseFile/";
-	private  final String manageView="/admin/manageFile.jsp",
+	final String basePath = "courseFile";
+	private  final String manageView="/teacher/manageFile.jsp",
 			listView="/listFile.jsp";
-	
 	@RequestMapping("/list")
-	public ModelAndView list(Integer cate,Integer cId, Integer uIndex, String view)
-	{
-		String servletPath=toServletPath(cate, cId, uIndex);
-		return list(servletPath, view);
-	}
 	ModelAndView list(String servletPath, String view)
 	{
-		if(servletPath==null) return illeageAccess("参数错误");
+		if(!validate(servletPath)) return illeageAccess("路径不能为空");
 		File file=new File(toRealPath(servletPath));
-		if(!file.exists()) file.mkdirs();
+		if(!file.exists()) return illeageAccess("你要访问的位置不存在");
 		File[] files=file.listFiles();
 		if(view==null) view=listView;
 		ModelAndView mav=new ModelAndView(view);
@@ -60,7 +55,6 @@ public class FileController {
 		String msg="路径错误";
 		if(!validate(servletPath)) return illeageAccess(msg);
 		String filePath =toRealPath(servletPath);
-		if(filePath==null) return illeageAccess("参数错误");
 		File file=new File(filePath);
 		for(String name:fileNames)
 			new File(file,name).delete();
@@ -91,14 +85,13 @@ public class FileController {
 	}
 	@RequestMapping(value="/download")
 	public ModelAndView download(HttpServletResponse response,String servletPath,
-			String fileName,
 			HttpServletRequest request)
 	{
 		if(!isLegal(request)) return new ModelAndView(Constant.LOGIN).
 				addObject("notice","请登录");
 		String msg="路径错误";
 		if(!validate(servletPath)) return illeageAccess(msg);
-		File file=new File(toRealPath(servletPath),fileName);
+		File file=new File(toRealPath(servletPath));
 		if(!file.exists()||file.isDirectory()) return illeageAccess("要下载的文件不存在");
 		response.setContentType("application/octet-stream");
 		response.addHeader("Content-Disposition","attachment;filename="+
@@ -135,19 +128,12 @@ public class FileController {
 	}
 	String toRealPath(String servletPath)
 	{
-		return (servletContext.getRealPath("/")+servletPath).replace('\\', '/');
-	}
-	String toServletPath(Integer cate,Integer cId, Integer uIndex)
-	{
-		if(null == cate || null == cId) return null;
-		if(cate<0||cate>=fileCate.length) return null;
-		return basePath+cId+"/"+uIndex+"/"+fileCate[cate];
+		return (servletContext.getRealPath("/courseFile")+"\\"+servletPath).replace('\\', '/');
 	}
 	boolean validate(String servletPath)
 	{
 		
-		if(servletPath.length()<basePath.length()||
-				basePath.compareTo(servletPath.substring(0,basePath.length()))!=0)
+		if(null==servletPath)
 				return false;
 		return true;
 	}

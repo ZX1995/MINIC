@@ -41,56 +41,56 @@ $(function()
 	$(".book1").click(function()
 	{
 		
-		$(".book11").toggle("slow");
+		$(this).find(".book11").toggle("slow");
 		
 	})
 
 	$(".book2").click(function()
 	{
 		
-		$(".book22").toggle("slow");
+		$(this).find(".book22").toggle("slow");
 		
 	})
 
 	$(".book3").click(function()
 	{
 		
-		$(".book33").toggle("slow");
+		$(this).find(".book33").toggle("slow");
 		
 	})
 
 	$(".book4").click(function()
 	{
 		
-		$(".book44").toggle("slow");
+		$(this).find(".book44").toggle("slow");
 		
 	})
 
 	$(".book5").click(function()
 	{
 		
-		$(".book55").toggle("slow");
+		$(this).find(".book55").toggle("slow");
 		
 	})
 
 	$(".book6").click(function()
 	{
 		
-		$(".book66").toggle("slow");
+		$(this).find(".book66").toggle("slow");
 		
 	})
 
 	$(".book7").click(function()
 	{
 		
-		$(".book77").toggle("slow");
+		$(this).find(".book77").toggle("slow");
 		
 	})
 
 	$(".book8").click(function()
 	{
 		
-		$(".book88").toggle("slow");
+		$(this).find(".book88").toggle("slow");
 		
 	})
 })

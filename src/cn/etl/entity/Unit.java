@@ -4,12 +4,27 @@ import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 
 @Entity
+@IdClass(UnitKey.class)
 public class Unit extends BaseDomain{
-	
-	@EmbeddedId
-	private UnitKey uId;
+	/**
+	 * 课程组名称
+	 */
+	@Id
+	private String gName;
+	/**
+	 * 在课程组里面的顺序
+	 */
+	@Id
+	private int cIndex;
+	/**
+	 * 单元顺序
+	 */
+	@Id
+	private int uIndex;
 	/**
 	 * 单元介绍
 	 */
@@ -19,16 +34,6 @@ public class Unit extends BaseDomain{
 	 */
 	private String uName;
 	
-	
-	
-
-	public UnitKey getuId() {
-		return uId;
-	}
-
-	public void setuId(UnitKey uId) {
-		this.uId = uId;
-	}
 
 	public String getuIntro() {
 		return uIntro;
@@ -44,11 +49,34 @@ public class Unit extends BaseDomain{
 		this.uName = uName;
 	}
 	
-    
+	public String getgName() {
+		return gName;
+	}
+
+	public void setgName(String gName) {
+		this.gName = gName;
+	}
+
+	public int getcIndex() {
+		return cIndex;
+	}
+
+	public void setcIndex(int cIndex) {
+		this.cIndex = cIndex;
+	}
+
+	public int getuIndex() {
+		return uIndex;
+	}
+
+	public void setuIndex(int uIndex) {
+		this.uIndex = uIndex;
+	}
+
 	@Override
 	public Serializable key() {
 		// TODO Auto-generated method stub
-		return uId;
+		return new UnitKey(gName, cIndex, uIndex);
 	}
 	
 }

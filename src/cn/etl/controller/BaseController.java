@@ -2,56 +2,32 @@ package cn.etl.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
-
 import cn.etl.dao.BaseDao;
-import cn.etl.entity.Admin;
-import cn.etl.entity.BaseDomain;
 import cn.etl.settting.Constant;
-
 public  class BaseController<T>{
 	private Class<T> entityClass;
 	protected BaseDao<T> baseDao;
-	@SuppressWarnings("unchecked")
-	public BaseController(){
-		Type genType = getClass().getGenericSuperclass();
-		Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
-		entityClass = (Class<T>) params[0];
-		WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext(); 
-		//加载对应的Dao实现类的bean @Resource的name必须是常量所以不能使用@Resource注解注入
-		baseDao=(BaseDao<T>) wac.getBean(firstLetterToLowerCase(entityClass.getSimpleName())+"DaoImpl");
-		
-	}
+
 	public Class<T> getEntityClass() {
 		return entityClass;
 	}
-	 //把类名的首字母变为小写，因为我的标识符使用小驼峰法，类命名使用大驼峰法
-	private String firstLetterToLowerCase(String s) 
+	public void setBaseDao(BaseDao baseDao)
 	{
-		char[] charArray=s.toCharArray();
-		if(charArray[0]<97) charArray[0]+='a'-'A';
-		return String.valueOf(charArray);
+		this.baseDao = baseDao;
 	}
 	
 	//列出所有记录 ,返回json串
-		@RequestMapping("/list")
-		public @ResponseBody List<T> list()
-		{
-			List<T> list=baseDao.loadAll();
-			return list;
-		}
+	@RequestMapping("/list")
+	public @ResponseBody List<T> list()
+	{
+		List<T> list=baseDao.loadAll();
+		return list;
+	}
 	//列出所有记录 ,返回页面
 	@RequestMapping("/listRView")
 	public ModelAndView listRView(String view){

@@ -28,7 +28,12 @@ public class User extends BaseDomain{
 	 */
 	private String email;
 	
-	
+	public User(){}
+	public User(String u,String p)
+	{
+		username=u;
+		password=p;
+	}
 	public String getUsername() {
 		return username;
 	}

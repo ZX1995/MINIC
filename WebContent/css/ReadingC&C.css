@@ -284,6 +284,8 @@ a:hover
     height: 225px;
     padding: 0;
     background-color: #f4f4f4;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .column1:hover
@@ -305,10 +307,10 @@ a:hover
 	font-weight: 500;
 	font-family: Plantagenet Cherokee;
 	font-size: 20px;
-	margin-top:100px;
-	margin-right: 10px;
 	margin-left: 10px;
-
+	margin-right: 10px;
+    word-break:break-all;
+    margin-top: 45px;
 }
 
 .learn

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/ReadingC&C.css">
+	<link rel="stylesheet" type="text/css" href="css/UnitLearn.css">
+	<script src="js/jquery-2.1.4.js" type="text/javascript"></script>
+	<script src="js/ReadingC&C.js" type="text/javascript"></script>
+  <script src="js/ckeditor.js"></script>
+        <script src="js/sample.js"></script>
+</head>
+<body class="bg1"><center>
+  <div class="address">
+	 <img class="en" src="images/en.png">
+	 <a id="add" href="">123456@mail.cn</a>
+	 <a class="loginOut" href="">注销</a>
+	 <img class="user" src="images/user.png">
+  </div>
+
+  <!--导航条  -->
+  <div class="menu">
+	<span class="title">MINIC</span>
+	<img class="search" src="images/search.png">
+	<ul class="navigation">
+	    <li class="navigation0"><a href="ReadingC&C.html">首 页</a></li>
+		<li class="navigation0"><a>训 练</a>
+           <ul class="navigation1">
+           <em></em>
+           	<li>
+           	  <a class="navi" href="">慕课</a>
+           	  <a class="navi" href="">口语自主测试</a>
+           	</li>
+           </ul>
+		</li>
+		<li class="navigation0"><a>多模态语料库</a></li>		
+	</ul>
+  </div>
+
+  <!-- 内容 -->
+  <div class="cc">
+  
+    <!-- 第二列，单元名称 -->
+    <div class="unitA">
+     <div class="admin">
+     <ul>
+        <li class="book1"><img class="icon" src="images/news.png"><a class="book0">新闻管理</a>
+                <ul class="book11">
+                  <li class="book111">&nbsp;&nbsp;&nbsp;&nbsp;<img class="icon" src="images/list.png"><a href="">新闻列表</a></li>
+                  <li class="book111">&nbsp;&nbsp;&nbsp;&nbsp;<img class="icon" src="images/newsMan.png"><a href="">发布新闻</a></li>
+                </ul>
+        </li>
+        <li class="book1"><img class="icon" src="images/learn.png"><a class="book0">资料管理</a>
+        </li>  
+        <li class="book1"><img class="icon" src="images/teacher.png"><a class="book0">教师管理</a>
+        </li>   
+        <li class="book1"><img class="icon" src="images/student.png"><a class="book0">学生管理</a>
+        </li>   
+      </ul>
+      </div>
+    </div>
+    <!-- 展示内容 -->
+    <div class="con2">
+    	
+    	    <div class="adjoined-bottom">
+            <div class="grid-container">
+              <div class="grid-width-100">
+                <div id="editor">
+                    <h1>Hello world!</h1>
+                    <p>I'm an instance of <a href="http://ckeditor.com">CKEditor</a>.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+    	</div>
+    
+  </div>
+  
+
+</center>
+<script>
+    initSample();
+   </script></body>
+</html>
